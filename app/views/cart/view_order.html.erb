@@ -2,19 +2,36 @@
 
 <div>
   <% if @line_items != [] || @line_items != nil %>
-    <ul>
-      <% @line_items.each do |item| %>
-        <li><%= item.product.name %></li>
-        <li><%= number_to_currency item.product.price %></li>
-        <li>Quantity: <%= item.quantity %></li>
-        <li>Subtotal: <%= number_to_currency item.line_item_total %></li>
-        <br>
-      <% end %>
-    </ul>
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% subtotal = 0 %>
+        <% @line_items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= number_to_currency item.product.price %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency item.line_item_total %></td>
+          <td><%= link_to "Delete", view_order_path, :data => {:confirm => "You sure?", :method => "delete"} %></td>
+        </tr>
+        <% subtotal += item.line_item_total %>
+        <% end %>
+        <tr class="text-right">
+          <td colspan="4"><strong><%= subtotal %></strong></td>
+        </tr>
+      </tbody>
+    </table>
     <%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-primary" %>
   <% else %>
     <p>Your cart is empty.  Go buy something!</p>
-    <p><%= link_to "Continue shopping", root_path, class: "btn btn-light" %> 
+    <p><%= link_to "Continue shopping", root_path, class: "btn btn-light" %></p>
   <% end %>
 </div>
-

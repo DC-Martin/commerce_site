@@ -1,2 +1,26 @@
-<h1>Cart#checkout</h1>
-<p>Find me in app/views/cart/checkout.html.erb</p>
+<h2>Thank you for shopping!</h2>
+<h6>Order review:</h6>
+
+
+
+<table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @order.order_items.each do |key, value| %>
+        <tr>
+          <td><%= Product.find(key).name %></td>
+          <td><%= value %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+<p>
+  <strong>Grand Total: <%= number_to_currency @order.grand_total %></strong>
+</p>
