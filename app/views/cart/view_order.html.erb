@@ -18,9 +18,17 @@
         <tr>
           <td><%= item.product.name %></td>
           <td><%= number_to_currency item.product.price %></td>
-          <td><%= item.quantity %></td>
+          <td>
+            <%= form_tag cart_edit_path, method: :post do %>
+            <%= hidden_field_tag :line_item_id, item.id %>
+            <%= hidden_field_tag :product_id, item.product.id %>
+            <%= number_field_tag :quantity, item.quantity, class: "change-quantity-field" %>
+            <%= submit_tag "Change", method: :post, class: "btn btn-light btn-s"%>
+            <%end%>
+              
+            </td>
           <td><%= number_to_currency item.line_item_total %></td>
-          <td><%= link_to "Delete", view_order_path, :data => {:confirm => "You sure?", :method => "delete"} %></td>
+          <td><%= link_to "Delete", cart_delete_path(line_item_id: item.id), :data => {:confirm => "You sure?", :method => "delete"} %></td>
         </tr>
         <% subtotal += item.line_item_total %>
         <% end %>

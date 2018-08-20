@@ -73,6 +73,7 @@
                 <!-- <a href="" class="navbar-link" role="button" aria-haspopup="true" aria-expanded="false"> -->
                   <%= link_to view_order_path do %>
                   <%= fa_icon "shopping-cart 2x", class: "text-white" %>
+                  <span class="cart-count"><%= @cart_count %></span>
                   <% end %>
                 </a>
             </li>

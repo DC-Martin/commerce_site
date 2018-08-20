@@ -15,6 +15,10 @@ gem 'better_errors', group: :development
 #hirb is better formatting for rails console
 gem 'hirb'
 gem 'binding_of_caller'
+#stripe is a payment system
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+#figaro to place keys to not be tracked
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
